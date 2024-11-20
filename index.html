@@ -8,10 +8,8 @@
         // Функция для перенаправления
         function redirect() {
             // Получаем текущий URL
-            const currentUrl = window.location.href;
-
-            // Заменяем домен
-            const newUrl = currentUrl.replace("скрим-дев.рф", "scream-dev.ru");
+            const path = window.location.pathname; // получает путь после домена
+            const newUrl = "https://scream-dev.ru" + path; // формирует новый URL
 
             // Перенаправляем пользователя на новый URL
             window.location.href = newUrl;
