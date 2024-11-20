@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Перенаправление</title>
-    <script type="text/javascript">
-        // Перенаправление на новый домен с сохранением пути
-        var newDomain = "https://scream-dev.ru";
-        window.location.href = newDomain + window.location.pathname + window.location.search;
+    <script>
+        // Функция для перенаправления
+        function redirect() {
+            // Получаем текущий URL
+            const currentUrl = window.location.href;
+
+            // Заменяем домен
+            const newUrl = currentUrl.replace("скрим-дев.рф", "scream-dev.ru");
+
+            // Перенаправляем пользователя на новый URL
+            window.location.href = newUrl;
+        }
+
+        // Выполняем перенаправление при загрузке страницы
+        window.onload = redirect;
     </script>
 </head>
 <body>
-    <p>Если вы не будете перенаправлены автоматически, <a href="https://scream-dev.ru">нажмите здесь</a>.</p>
+    <h1>Перенаправление на новый сайт...</h1>
 </body>
 </html>
