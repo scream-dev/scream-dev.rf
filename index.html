@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
+    <title>Регистрация и Логин</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -50,30 +50,55 @@
             margin-top: 10px;
             color: red;
         }
+        h2 {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Регистрация</h2>
-        <input type="text" id="username" placeholder="Уникальное имя пользователя" />
-        <input type="password" id="password" placeholder="Пароль (от 5 символов)" />
+        <input type="text" id="registerUsername" placeholder="Уникальное имя пользователя" />
+        <input type="password" id="registerPassword" placeholder="Пароль (от 5 символов)" />
         <button id="registerButton">Зарегистрироваться</button>
-        <div id="message" class="message"></div>
+        <div id="registerMessage" class="message"></div>
+
+        <h2>Логин</h2>
+        <input type="text" id="loginUsername" placeholder="Имя пользователя" />
+        <input type="password" id="loginPassword" placeholder="Пароль" />
+        <button id="loginButton">Войти</button>
+        <div id="loginMessage" class="message"></div>
     </div>
 
     <script>
-        document.getElementById('registerButton').addEventListener('click', async () => {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+        const BASE_URL = 'http://localhost:3000';
 
-            const response = await fetch('http://localhost:3000/register', {
+        document.getElementById('registerButton').addEventListener('click', async () => {
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+
+            const response = await fetch(`${BASE_URL}/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
             });
 
             const data = await response.json();
-            document.getElementById('message').innerText = data.message;
+            document.getElementById('registerMessage').innerText = data.message;
+        });
+
+        document.getElementById('loginButton').addEventListener('click', async () => {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const response = await fetch(`${BASE_URL}/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await response.json();
+            document.getElementById('loginMessage').innerText = data.message;
         });
     </script>
 </body>
