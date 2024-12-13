@@ -3,23 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Перенаправление</title>
-    <script>
-        // Функция для перенаправления
-        function redirect() {
-            // Получаем текущий URL
-            const path = window.location.pathname; // получает путь после домена
-            const newUrl = "https://scream-dev.ru" + path; // формирует новый URL
-
-            // Перенаправляем пользователя на новый URL
-            window.location.href = newUrl;
+    <title>Регистрация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-
-        // Выполняем перенаправление при загрузке страницы
-        window.onload = redirect;
-    </script>
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            animation: fadeIn 1s;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            animation: fadeIn 1s;
+        }
+        button:hover {
+            background: #218838;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .message {
+            margin-top: 10px;
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <h1>Перенаправление на новый сайт...</h1>
+    <div class="container">
+        <h2>Регистрация</h2>
+        <input type="text" id="username" placeholder="Уникальное имя пользователя" />
+        <input type="password" id="password" placeholder="Пароль (от 5 символов)" />
+        <button id="registerButton">Зарегистрироваться</button>
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('registerButton').addEventListener('click', async () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('http://localhost:3000/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await response.json();
+            document.getElementById('message').innerText = data.message;
+        });
+    </script>
 </body>
 </html>
