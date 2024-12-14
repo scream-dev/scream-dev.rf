@@ -3,103 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация и Логин</title>
+    <title>Сервис Сокращения Ссылок</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f4f4f4;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
         }
-        .container {
-            background: white;
+        h1 {
+            color: #333;
+        }
+        form {
+            background: #fff;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
-            animation: fadeIn 1s;
+            text-align: center;
         }
-        input {
+        input[type="text"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
         }
         button {
-            width: 100%;
             padding: 10px;
-            background: #28a745;
+            background-color: #28a745;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
-            animation: fadeIn 1s;
         }
         button:hover {
-            background: #218838;
+            background-color: #218838;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .message {
-            margin-top: 10px;
-            color: red;
-        }
-        h2 {
-            text-align: center;
+        .result {
+            margin-top: 20px;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Регистрация</h2>
-        <input type="text" id="registerUsername" placeholder="Уникальное имя пользователя" />
-        <input type="password" id="registerPassword" placeholder="Пароль (от 5 символов)" />
-        <button id="registerButton">Зарегистрироваться</button>
-        <div id="registerMessage" class="message"></div>
 
-        <h2>Логин</h2>
-        <input type="text" id="loginUsername" placeholder="Имя пользователя" />
-        <input type="password" id="loginPassword" placeholder="Пароль" />
-        <button id="loginButton">Войти</button>
-        <div id="loginMessage" class="message"></div>
-    </div>
+    <h1>Сокращение Ссылок</h1>
+    <form id="shortenForm">
+        <input type="text" id="urlInput" placeholder="Введите URL для сокращения" required>
+        <button type="submit">Сократить</button>
+    </form>
+    <div class="result" id="result"></div>
 
     <script>
-        const BASE_URL = 'http://localhost:3000';
-
-        document.getElementById('registerButton').addEventListener('click', async () => {
-            const username = document.getElementById('registerUsername').value;
-            const password = document.getElementById('registerPassword').value;
-
-            const response = await fetch(`${BASE_URL}/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-
-            const data = await response.json();
-            document.getElementById('registerMessage').innerText = data.message;
-        });
-
-        document.getElementById('loginButton').addEventListener('click', async () => {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-
-            const response = await fetch(`${BASE_URL}/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-
-            const data = await response.json();
-            document.getElementById('loginMessage').innerText = data.message;
+        document.getElementById('shortenForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const url = document.getElementById('urlInput').value;
+            const shortUrl = `https://скрим-дев.рф/${btoa(url).substr(0, 8)}`; // Пример сокращения на основе base64
+            document.getElementById('result').innerHTML = `Сокращенная ссылка: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
         });
     </script>
+
 </body>
 </html>
