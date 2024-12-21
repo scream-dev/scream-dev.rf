@@ -3,70 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сервис Сокращения Ссылок</title>
+    <title>Мой сайт</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             margin: 0;
+            padding: 0;
         }
-        h1 {
-            color: #333;
-        }
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-        }
-        input[type="text"] {
+        iframe {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        .result {
-            margin-top: 20px;
-            color: #333;
+            height: 100vh; /* Использует всю высоту окна */
+            border: none; /* Убирает рамку у iframe */
         }
     </style>
 </head>
 <body>
-
-    <h1>Сокращение Ссылок</h1>
-    <form id="shortenForm">
-        <input type="text" id="urlInput" placeholder="Введите URL для сокращения" required>
-        <button type="submit">Сократить</button>
-    </form>
-    <div class="result" id="result"></div>
-
-    <script>
-        document.getElementById('shortenForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const url = document.getElementById('urlInput').value;
-            const shortUrl = `https://скрим-дев.рф/${btoa(url).substr(0, 8)}`; // Пример сокращения на основе base64
-            document.getElementById('result').innerHTML = `Сокращенная ссылка: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
-        });
-    </script>
-
+    <iframe src="http://example.com" title="Мой сайт"></iframe>
 </body>
 </html>
